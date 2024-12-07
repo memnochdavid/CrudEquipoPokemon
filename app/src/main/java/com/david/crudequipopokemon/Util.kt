@@ -1,11 +1,14 @@
 package com.david.crudequipopokemon
 
 import android.content.Context
+import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.backgroundColor
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.database.DataSnapshot
@@ -68,6 +71,8 @@ class Util {
             val animacion = CircularProgressDrawable(contexto)
             animacion.strokeWidth = 5f
             animacion.centerRadius = 30f
+            // Set background color to transparent
+            animacion.backgroundColor = Color.TRANSPARENT
             animacion.start()
 
             return animacion

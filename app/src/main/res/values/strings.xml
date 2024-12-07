@@ -2,6 +2,7 @@
     <string name="app_name">CrudEquipoPokemon</string>
     <string name="boton_equipo">Muestra Equipo</string>
     <string name="boton_registra">Registra Pokémon</string>
+    <string name="boton_edita">Edita Pokémon</string>
     <string name="boton_volver">Volver</string>
     <string name="error_tipo">El Pokémon debe tener al menos un tipo</string>
     <string name="error_foto">El Pokémon debe tener al menos una iamgen asociada</string>

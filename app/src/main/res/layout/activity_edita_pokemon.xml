@@ -5,38 +5,38 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistraActivity">
+    tools:context=".EditaPokemonActivity">
 
     <LinearLayout
-        android:id="@+id/uno"
-        android:paddingVertical="20dp"
-        android:orientation="vertical"
+    android:id="@+id/uno"
+    android:paddingVertical="20dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:background="@color/rojo"
+    app:layout_constraintVertical_weight="2"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/dos">
+
+    <ImageView
+        android:id="@+id/foto"
+        android:layout_weight="1"
+        android:src="@drawable/pokeball"
+        android:paddingVertical="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/error_foto"
+        android:text="@string/error_foto"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/rojo"
-        app:layout_constraintVertical_weight="2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/dos">
+        android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/foto"
-            android:layout_weight="1"
-            android:src="@drawable/pokeball"
-            android:paddingVertical="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/error_foto"
-            android:text="@string/error_foto"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
+</LinearLayout>
     <LinearLayout
         android:id="@+id/dos"
         android:orientation="horizontal"
@@ -97,23 +97,23 @@
 
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <TextView
-            android:id="@+id/error_tipo"
-            android:text="@string/error_tipo"
-            android:textColor="@color/rojo"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:visibility="gone"
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/error_tipo"
+                android:text="@string/error_tipo"
+                android:textColor="@color/rojo"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
 
 
@@ -129,12 +129,12 @@
         app:layout_constraintTop_toBottomOf="@+id/tres">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/registra"
+            android:id="@+id/edita"
             android:padding="15dp"
             android:layout_marginVertical="20dp"
             android:textColor="@color/white"
             android:background="@drawable/boton"
-            android:text="@string/boton_registra"
+            android:text="@string/boton_edita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

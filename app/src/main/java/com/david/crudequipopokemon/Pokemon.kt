@@ -1,21 +1,19 @@
 package com.david.crudequipopokemon
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
-@Parcelize
 data class PokemonFB(
     var id: String? = null,
     var imagenFB: String? = null,
+    var id_imagen: String? = null,
     var name: String="",
     var tipo: List<PokemonTipo> = mutableListOf(),
     var stability:Int=0
-): Serializable, Parcelable {
+): Serializable{
     constructor(
         name: String,
         tipo: List<PokemonTipo>
-    ) : this(null,null, name, tipo)
+    ) : this(null,null, null, name, tipo)
 }
 
 enum class PokemonTipo(val tag: String) {

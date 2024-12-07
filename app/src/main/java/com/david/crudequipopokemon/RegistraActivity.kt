@@ -184,7 +184,7 @@ class RegistraActivity : AppCompatActivity() {
                         }
                         foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto"
 
-                        newPokemon = PokemonFB(identificador_poke,foto,nombre,tipo)
+                        newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo)
 
                         //subimos los datos a firebase
                         refDB.child("equipo").child("pokemon").child(identificador_poke!!).setValue(newPokemon)
