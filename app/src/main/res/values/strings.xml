@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CrudEquipoPokemon</string>
+    <string name="boton_equipo">Muestra Equipo</string>
+    <string name="boton_registra">Registra Pokémon</string>
+</resources>

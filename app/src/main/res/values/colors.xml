@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#EEF1F3</color>
+    <color name="aqua_oscuro">#19525E</color>
+    <color name="aqua_claro">#0B7974</color>
+    <color name="vainilla">#D5C7A9</color>
+    <color name="marron">#7A2D26</color>
+</resources>
