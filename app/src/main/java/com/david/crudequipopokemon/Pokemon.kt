@@ -13,21 +13,15 @@ data class Pokemon(
 )
 @Parcelize
 data class PokemonFB(
-    var num:Int=0,
-    var gen: String="",
     var imagenFB: String? = null,//soporte en la nube
     var name: String="",
-    var desc: String="",
     var tipo: List<PokemonTipoFB> = listOf(),
     var stability:Int=0
 ): Serializable, Parcelable {
     constructor(
-        num: Int,
-        gen: String,
         name: String,
-        desc: String,
         tipo: List<PokemonTipoFB>
-    ) : this(num, gen, null, name, desc, tipo)
+    ) : this(null, name, tipo)
 }
 
 enum class PokemonTipoFB(val tag: String) {
