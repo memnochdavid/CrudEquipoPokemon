@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/uno"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/rojo"
@@ -18,9 +18,21 @@
         app:layout_constraintBottom_toTopOf="@+id/dos">
 
         <ImageView
+            android:id="@+id/foto"
+            android:layout_weight="1"
             android:src="@drawable/pokeball"
             android:paddingVertical="15dp"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/error_foto"
+            android:text="@string/error_foto"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -29,33 +41,113 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="20dp"
         app:layout_constraintVertical_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/tres"
-        app:layout_constraintTop_toBottomOf="@+id/uno"/>
+        app:layout_constraintTop_toBottomOf="@+id/uno">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nombre_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="nombre"
+            app:errorEnabled="true"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nombre_text_input_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/tres"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="20dp"
         app:layout_constraintVertical_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/cuatro"
-        app:layout_constraintTop_toBottomOf="@+id/dos"/>
+        app:layout_constraintTop_toBottomOf="@+id/dos">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <Spinner
+                android:layout_weight="1"
+                android:id="@+id/tipo_pokemon1"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Spinner
+                android:layout_weight="1"
+                android:id="@+id/tipo_pokemon2"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/error_tipo"
+            android:text="@string/error_tipo"
+            android:textColor="@color/rojo"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/cuatro"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintBottom_toTopOf="@+id/cinco"
-        app:layout_constraintTop_toBottomOf="@+id/tres"/>
-    <LinearLayout
-        android:id="@+id/cinco"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toBottomOf="@+id/cuatro"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:gravity="center"
+        app:layout_constraintVertical_weight="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tres">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/registra"
+            android:padding="15dp"
+            android:layout_marginVertical="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/boton"
+            android:text="@string/boton_registra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/volver"
+            android:padding="15dp"
+            android:layout_marginVertical="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/boton"
+            android:text="@string/boton_volver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 
 

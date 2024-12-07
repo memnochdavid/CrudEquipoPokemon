@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "100514738878",
+    "firebase_url": "https://crudequipopokemon-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "crudequipopokemon",
+    "storage_bucket": "crudequipopokemon.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100514738878:android:446d44cbd0d04d32f1a4ef",
+        "android_client_info": {
+          "package_name": "com.david.crudequipopokemon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB83JsIVTfD0BfeNuEESSlrUGvCWdpkM2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
