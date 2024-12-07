@@ -30,7 +30,6 @@ class EditaPokemonActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditaPokemonBinding//importamos el layoput al completo
     //Firebase
     private lateinit var refDB: DatabaseReference
-    //private lateinit var storage: StorageReference
     private var url_foto: Uri? = null
     //AppWriteStorage
     private lateinit var id_projecto: String
@@ -92,7 +91,6 @@ class EditaPokemonActivity : AppCompatActivity() {
             tipo2 = pokemon.tipo[1]
         }
 
-        //var tipo2:PokemonTipo=PokemonTipo.NULL
         var foto_seleccionada=false
 
         binding.foto.setOnClickListener {
@@ -113,7 +111,6 @@ class EditaPokemonActivity : AppCompatActivity() {
         val adapter1 = ArrayAdapter(this, R.layout.spinner_a, tipos)
         adapter1.setDropDownViewResource(R.layout.spinner_b)
         binding.tipoPokemon1.adapter = adapter1
-        //cuando se selecciona un item lo guarda en sexo(sí por favor oh yeah)
         binding.tipoPokemon1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedType = parent?.getItemAtPosition(position) as PokemonTipo
@@ -125,7 +122,7 @@ class EditaPokemonActivity : AppCompatActivity() {
                     }
                 } else {
                     if (selectedType == PokemonTipo.NULL) {
-                        tipo.removeAt(0) // Remove NULL from the list
+                        tipo.removeAt(0)
                     }
                 }
             }
@@ -136,7 +133,6 @@ class EditaPokemonActivity : AppCompatActivity() {
         val adapter2 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
         adapter2.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
         binding.tipoPokemon2.adapter = adapter2
-        //cuando se selecciona un item lo guarda en sexo(sí por favor oh yeah)
         binding.tipoPokemon2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedType = parent?.getItemAtPosition(position) as PokemonTipo
@@ -148,7 +144,7 @@ class EditaPokemonActivity : AppCompatActivity() {
                     }
                 } else {
                     if (tipo.size >= 2 && selectedType == PokemonTipo.NULL) {
-                        tipo.removeAt(1) // Remove NULL from the list
+                        tipo.removeAt(1)
                     }
                 }
             }
@@ -178,7 +174,6 @@ class EditaPokemonActivity : AppCompatActivity() {
                 binding.errorTipo.visibility= View.GONE
                 binding.errorFoto.visibility= View.GONE
 
-                //val identificador_poke = refDB.child("equipo").child("pokemon").push().key
                 val identificador_poke = pokemon.id
 
                 //subimos la imagen a appwrite storage y los datos a firebase
@@ -202,34 +197,22 @@ class EditaPokemonActivity : AppCompatActivity() {
                             }
                             InputFile.fromFile(tempFile) // tenemos un archivo temporal con la imagen
                         }
-
-
-
-
-                        //withContext(Dispatchers.IO) {
-                            //se sube la imagen a appwrite
-                            storage.createFile(
-                                bucketId = id_bucket,
-                                fileId = identificadorAppWrite,
-                                file = file
-                            )
-                       // }
+                        storage.createFile(
+                            bucketId = id_bucket,
+                            fileId = identificadorAppWrite,
+                            file = file
+                        )
                         foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto"
 
                         newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo)
 
                         //subimos los datos a firebase
                         refDB.child("equipo").child("pokemon").child(identificador_poke!!).setValue(newPokemon)
-                        //db_ref.child("nba").child("clubs").child(id).setValue(club)
 
                     }catch (e: Exception){
                         Log.e("UploadError", "Error al subir la imagen: ${e.message}")
                     }
                 }
-
-
-
-
 
             }
 

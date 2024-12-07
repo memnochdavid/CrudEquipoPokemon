@@ -86,12 +86,11 @@ class RegistraActivity : AppCompatActivity() {
         //spinner
         val tipos= PokemonTipo.entries
 
-        //fghfgj
 
         val adapter1 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
         adapter1.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
         binding.tipoPokemon1.adapter = adapter1
-        //cuando se selecciona un item lo guarda en sexo(sí por favor oh yeah)
+
         binding.tipoPokemon1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedType = parent?.getItemAtPosition(position) as PokemonTipo
@@ -103,7 +102,7 @@ class RegistraActivity : AppCompatActivity() {
                     }
                 } else {
                     if (selectedType == PokemonTipo.NULL) {
-                        tipo.removeAt(0) // Remove NULL from the list
+                        tipo.removeAt(0)
                     }
                 }
             }
@@ -114,7 +113,7 @@ class RegistraActivity : AppCompatActivity() {
         val adapter2 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
         adapter2.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
         binding.tipoPokemon2.adapter = adapter2
-        //cuando se selecciona un item lo guarda en sexo(sí por favor oh yeah)
+
         binding.tipoPokemon2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedType = parent?.getItemAtPosition(position) as PokemonTipo
@@ -126,7 +125,7 @@ class RegistraActivity : AppCompatActivity() {
                     }
                 } else {
                     if (tipo.size >= 2 && selectedType == PokemonTipo.NULL) {
-                        tipo.removeAt(1) // Remove NULL from the list
+                        tipo.removeAt(1)
                     }
                 }
             }
