@@ -86,6 +86,8 @@ class RegistraActivity : AppCompatActivity() {
         //spinner
         val tipos= PokemonTipo.entries
 
+        //fghfgj
+
         val adapter1 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
         adapter1.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
         binding.tipoPokemon1.adapter = adapter1

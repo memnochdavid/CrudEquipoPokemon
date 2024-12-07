@@ -6,12 +6,14 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.david.crudequipopokemon.databinding.ActivityEditaPokemonBinding
 import com.david.crudequipopokemon.databinding.ActivityRegistraBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -25,7 +27,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class EditaPokemonActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRegistraBinding//importamos el layoput al completo
+    private lateinit var binding: ActivityEditaPokemonBinding//importamos el layoput al completo
     //Firebase
     private lateinit var refDB: DatabaseReference
     //private lateinit var storage: StorageReference
@@ -46,7 +48,7 @@ class EditaPokemonActivity : AppCompatActivity() {
             insets
         }
         //se inicializa el binding
-        binding = ActivityRegistraBinding.inflate(layoutInflater)
+        binding = ActivityEditaPokemonBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //inicializamos el scope
@@ -58,13 +60,15 @@ class EditaPokemonActivity : AppCompatActivity() {
         //re recupera el intent
         val pokemon = intent.getSerializableExtra("pokemon") as PokemonFB
 
-        binding.nombreTextInputEdit.setText(pokemon.name)
+
 
         Glide.with(this)
             .load(pokemon.imagenFB)
-            .apply(Util.opcionesGlide(applicationContext))
-            .transition(Util.transicion)
+            .fitCenter()
             .into(binding.foto)
+
+        binding.nombreTextInputEdit.setText(pokemon.name)
+
 
 
         //AppWriteStorage
@@ -78,12 +82,17 @@ class EditaPokemonActivity : AppCompatActivity() {
         val storage = Storage(client)
 
 
-        var newPokemon=PokemonFB()
-        var nombre=""
-        var tipo: MutableList<PokemonTipo> = mutableListOf()
-        var foto=""
-        var tipo1:PokemonTipo=PokemonTipo.NULL
+        var newPokemon=pokemon
+        var nombre=pokemon.name
+        var tipo=pokemon.tipo as MutableList<PokemonTipo>
+        var foto=pokemon.imagenFB
+        var tipo1=pokemon.tipo[0]
         var tipo2:PokemonTipo=PokemonTipo.NULL
+        if(pokemon.tipo.size>1) {
+            tipo2 = pokemon.tipo[1]
+        }
+
+        //var tipo2:PokemonTipo=PokemonTipo.NULL
         var foto_seleccionada=false
 
         binding.foto.setOnClickListener {
@@ -95,8 +104,14 @@ class EditaPokemonActivity : AppCompatActivity() {
         //spinner
         val tipos= PokemonTipo.entries
 
-        val adapter1 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
-        adapter1.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
+        val predefinedIndex1 = tipos.indexOf(tipo.getOrNull(0) ?: PokemonTipo.NULL)
+        val predefinedIndex2 = tipos.indexOf(tipo.getOrNull(1) ?: PokemonTipo.NULL)
+
+        binding.tipoPokemon1.setSelection(predefinedIndex1)
+        binding.tipoPokemon2.setSelection(predefinedIndex2)
+
+        val adapter1 = ArrayAdapter(this, R.layout.spinner_a, tipos)
+        adapter1.setDropDownViewResource(R.layout.spinner_b)
         binding.tipoPokemon1.adapter = adapter1
         //cuando se selecciona un item lo guarda en sexo(sí por favor oh yeah)
         binding.tipoPokemon1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -145,7 +160,7 @@ class EditaPokemonActivity : AppCompatActivity() {
 
 
         //confirma
-        binding.registra.setOnClickListener {
+        binding.edita.setOnClickListener {
             //nombre
             nombre=binding.nombreTextInputEdit.text.toString()
             //valida los datos introducidos y muestra los errores
@@ -163,15 +178,20 @@ class EditaPokemonActivity : AppCompatActivity() {
                 binding.errorTipo.visibility= View.GONE
                 binding.errorFoto.visibility= View.GONE
 
-                val identificador_poke = refDB.child("equipo").child("pokemon").push().key
+                //val identificador_poke = refDB.child("equipo").child("pokemon").push().key
+                val identificador_poke = pokemon.id
 
                 //subimos la imagen a appwrite storage y los datos a firebase
                 var identificadorAppWrite = identificador_poke?.substring(1, 20) ?: "" // coge el identificador y lo adapta a appwrite
 
                 //necesario para crear un archivo temporal con la imagen
                 val inputStream = this.contentResolver.openInputStream(url_foto!!)
-                scopeUser.launch {//scope para las funciones de appwrite, pero ya aprovechamos y metemos el código de firebase
+                scopeUser.launch(Dispatchers.IO) {//scope para las funciones de appwrite, pero ya aprovechamos y metemos el código de firebase
                     try{
+                        storage.deleteFile(
+                            bucketId = id_bucket,
+                            fileId = pokemon.id_imagen!!
+                        )
 
                         val file = inputStream.use { input ->
                             val tempFile = kotlin.io.path.createTempFile(identificadorAppWrite).toFile()
@@ -183,21 +203,24 @@ class EditaPokemonActivity : AppCompatActivity() {
                             InputFile.fromFile(tempFile) // tenemos un archivo temporal con la imagen
                         }
 
-                        withContext(Dispatchers.IO) {
+
+
+
+                        //withContext(Dispatchers.IO) {
                             //se sube la imagen a appwrite
                             storage.createFile(
                                 bucketId = id_bucket,
                                 fileId = identificadorAppWrite,
                                 file = file
                             )
-                        }
+                       // }
                         foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto"
 
                         newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo)
 
                         //subimos los datos a firebase
                         refDB.child("equipo").child("pokemon").child(identificador_poke!!).setValue(newPokemon)
-
+                        //db_ref.child("nba").child("clubs").child(id).setValue(club)
 
                     }catch (e: Exception){
                         Log.e("UploadError", "Error al subir la imagen: ${e.message}")
