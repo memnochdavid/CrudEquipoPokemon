@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -78,7 +79,6 @@ class PokemonAdaptador(private val equipo: MutableList<PokemonFB>) :
             intent.putExtra("pokemon",pokemon_actual)
             contexto.startActivity(intent)
         }
-
         holder.borrar.setOnClickListener{
             val refDB= FirebaseDatabase.getInstance().reference
             val id_projecto = "67542604001bce94410d"
@@ -104,6 +104,21 @@ class PokemonAdaptador(private val equipo: MutableList<PokemonFB>) :
             notifyItemRemoved(position)
             notifyItemRangeChanged(position,lista_filtrada.size)
 
+        }
+
+        var puntiacion=pokemon_actual.puntuacion
+        val params = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        val parentLayout = holder.itemView.findViewById<LinearLayout>(R.id.estrellas)
+        parentLayout.removeAllViews()
+
+        for (i in 1..5) {
+            val imageView = ImageView(contexto)
+            imageView.layoutParams = params
+            imageView.setImageResource(if (i <= puntiacion) R.drawable.star_full else R.drawable.star_empty)
+            parentLayout.addView(imageView, params)
         }
 
     }

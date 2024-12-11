@@ -4,9 +4,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -90,6 +92,8 @@ class EditaPokemonActivity : AppCompatActivity() {
         if(pokemon.tipo.size>1) {
             tipo2 = pokemon.tipo[1]
         }
+        var num=pokemon.num
+        var puntuacion=pokemon.puntuacion
 
         var foto_seleccionada=false
 
@@ -130,6 +134,65 @@ class EditaPokemonActivity : AppCompatActivity() {
                 //nada
             }
         }
+
+        //las estrellas
+        val params = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        val parentLayout = binding.cuatro
+        parentLayout.removeAllViews()
+
+        for (i in 1..5) {
+            val imageView = ImageView(this)
+            imageView.layoutParams = params
+            imageView.setImageResource(if (i <= puntuacion) R.drawable.star_full else R.drawable.star_empty)
+            parentLayout.addView(imageView, params)
+        }
+
+
+
+        binding.star1.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_empty)
+            binding.star3.setImageResource(R.drawable.star_empty)
+            binding.star4.setImageResource(R.drawable.star_empty)
+            binding.star5.setImageResource(R.drawable.star_empty)
+            puntuacion=1f
+        }
+        binding.star2.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_full)
+            binding.star3.setImageResource(R.drawable.star_empty)
+            binding.star4.setImageResource(R.drawable.star_empty)
+            binding.star5.setImageResource(R.drawable.star_empty)
+            puntuacion=2f
+        }
+        binding.star3.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_full)
+            binding.star3.setImageResource(R.drawable.star_full)
+            binding.star4.setImageResource(R.drawable.star_empty)
+            binding.star5.setImageResource(R.drawable.star_empty)
+            puntuacion=3f
+        }
+        binding.star4.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_full)
+            binding.star3.setImageResource(R.drawable.star_full)
+            binding.star4.setImageResource(R.drawable.star_full)
+            binding.star5.setImageResource(R.drawable.star_empty)
+            puntuacion=4f
+        }
+        binding.star5.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_full)
+            binding.star3.setImageResource(R.drawable.star_full)
+            binding.star4.setImageResource(R.drawable.star_full)
+            binding.star5.setImageResource(R.drawable.star_full)
+            puntuacion=5f
+        }
+
         val adapter2 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
         adapter2.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
         binding.tipoPokemon2.adapter = adapter2
@@ -159,6 +222,7 @@ class EditaPokemonActivity : AppCompatActivity() {
         binding.edita.setOnClickListener {
             //nombre
             nombre=binding.nombreTextInputEdit.text.toString()
+            num=binding.numeroTextInputEdit.text.toString().toInt()
             //valida los datos introducidos y muestra los errores
 
             if(!validaNombre(nombre)) {
@@ -204,7 +268,7 @@ class EditaPokemonActivity : AppCompatActivity() {
                         )
                         foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto"
 
-                        newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo)
+                        newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo,num,puntuacion)
 
                         //subimos los datos a firebase
                         refDB.child("equipo").child("pokemon").child(identificador_poke!!).setValue(newPokemon)

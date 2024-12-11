@@ -36,6 +36,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/num"
+            android:text="num"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tipo1"
+            app:layout_constraintStart_toEndOf="@+id/pokemonImage"
+            app:layout_constraintEnd_toStartOf="@+id/pokemonName"/>
+
+        <TextView
             android:id="@+id/pokemonName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,28 +59,28 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tipo1"
             app:layout_constraintStart_toStartOf="@id/tipo1"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/edita"/>
 
         <ImageView
             android:id="@+id/edita"
-            android:paddingStart="20dp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="3dp"
             android:src="@drawable/edita"
             android:visibility="visible"
             app:layout_constraintTop_toTopOf="@+id/pokemonName"
-            app:layout_constraintStart_toEndOf="@+id/pokemonName"
             app:layout_constraintEnd_toStartOf="@+id/borra"/>
         <ImageView
             android:id="@+id/borra"
+            android:paddingStart="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="3dp"
             android:src="@drawable/borra"
             android:visibility="visible"
             app:layout_constraintTop_toTopOf="@+id/pokemonName"
-            app:layout_constraintStart_toEndOf="@+id/edita"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
@@ -92,6 +105,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/tipo1"
             app:layout_constraintTop_toBottomOf="@id/pokemonName"/>
+
+        <LinearLayout
+            android:id="@+id/estrellas"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tipo1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/pokemonName">
+
+            <!--Aquí las estrellas-->
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

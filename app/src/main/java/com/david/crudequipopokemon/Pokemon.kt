@@ -10,18 +10,18 @@ data class PokemonFB(
     var id_imagen: String? = null,
     var name: String="",
     var tipo: List<PokemonTipo> = mutableListOf(),
-    var fecha_captura:String="",
     var num:Int=0,
     var puntuacion:Float=0f,
+    var fecha_captura:String="",
     var stability:Int=0
 ): Serializable{
     constructor(
         name: String,
         tipo: List<PokemonTipo>,
-        fecha_captura:String,
         num:Int,
         puntuacion:Float,
-    ) : this(null,null, null, name, tipo, fecha_captura,num,puntuacion)
+        fecha_captura:String,
+    ) : this(null,null, null, name, tipo,num,puntuacion,fecha_captura)
     init{
         fecha_captura=getCurrentDate()
     }

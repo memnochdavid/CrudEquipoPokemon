@@ -76,6 +76,8 @@ class RegistraActivity : AppCompatActivity() {
         var foto=""
         var tipo1:PokemonTipo=PokemonTipo.NULL
         var tipo2:PokemonTipo=PokemonTipo.NULL
+        var num=0
+        var puntuacion=0f
         var foto_seleccionada=false
 
         binding.foto.setOnClickListener {
@@ -135,12 +137,53 @@ class RegistraActivity : AppCompatActivity() {
             }
         }
 
-
+        //las estrellas
+        binding.star1.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_empty)
+            binding.star3.setImageResource(R.drawable.star_empty)
+            binding.star4.setImageResource(R.drawable.star_empty)
+            binding.star5.setImageResource(R.drawable.star_empty)
+            puntuacion=1f
+        }
+        binding.star2.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_full)
+            binding.star3.setImageResource(R.drawable.star_empty)
+            binding.star4.setImageResource(R.drawable.star_empty)
+            binding.star5.setImageResource(R.drawable.star_empty)
+            puntuacion=2f
+        }
+        binding.star3.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_full)
+            binding.star3.setImageResource(R.drawable.star_full)
+            binding.star4.setImageResource(R.drawable.star_empty)
+            binding.star5.setImageResource(R.drawable.star_empty)
+            puntuacion=3f
+        }
+        binding.star4.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_full)
+            binding.star3.setImageResource(R.drawable.star_full)
+            binding.star4.setImageResource(R.drawable.star_full)
+            binding.star5.setImageResource(R.drawable.star_empty)
+            puntuacion=4f
+        }
+        binding.star5.setOnClickListener {
+            binding.star1.setImageResource(R.drawable.star_full)
+            binding.star2.setImageResource(R.drawable.star_full)
+            binding.star3.setImageResource(R.drawable.star_full)
+            binding.star4.setImageResource(R.drawable.star_full)
+            binding.star5.setImageResource(R.drawable.star_full)
+            puntuacion=5f
+        }
 
         //confirma
         binding.registra.setOnClickListener {
             //nombre
             nombre=binding.nombreTextInputEdit.text.toString()
+            num=binding.numeroTextInputEdit.text.toString().toInt()
             //valida los datos introducidos y muestra los errores
 
             if(!validaNombre(nombre)) {
@@ -186,7 +229,7 @@ class RegistraActivity : AppCompatActivity() {
                         }
                         foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto&output=png"
 
-                        newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo)
+                        newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo,num,puntuacion)
 
                         //subimos los datos a firebase
                         refDB.child("equipo").child("pokemon").child(identificador_poke!!).setValue(newPokemon)
