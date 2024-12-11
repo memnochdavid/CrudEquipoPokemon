@@ -34,6 +34,7 @@ class PokemonAdaptador(private val equipo: MutableList<PokemonFB>) :
         val pokemonName: TextView = itemView.findViewById(R.id.pokemonName)
         val pokemonTipo1: ImageView = itemView.findViewById(R.id.tipo1)
         val pokemonTipo2: ImageView = itemView.findViewById(R.id.tipo2)
+        val num=itemView.findViewById<TextView>(R.id.num)
         val editar: ImageView = itemView.findViewById(R.id.edita)
         val borrar: ImageView = itemView.findViewById(R.id.borra)
     }
@@ -48,11 +49,13 @@ class PokemonAdaptador(private val equipo: MutableList<PokemonFB>) :
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val pokemon_actual = lista_filtrada[position]
         holder.pokemonName.text = pokemon_actual.name
+        holder.num.text="${pokemon_actual.num}"
         holder.pokemonTipo1.setImageResource(enumToDrawableFB(pokemon_actual.tipo[0]))
         if (pokemon_actual.tipo.size > 1) {
             holder.pokemonTipo2.setImageResource(enumToDrawableFB(pokemon_actual.tipo[1]))
             holder.pokemonTipo2.visibility = View.VISIBLE
         }
+
 
 
 

@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -136,60 +137,87 @@ class EditaPokemonActivity : AppCompatActivity() {
         }
 
         //las estrellas
-        val params = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        val parentLayout = binding.cuatro
-        parentLayout.removeAllViews()
 
-        for (i in 1..5) {
-            val imageView = ImageView(this)
-            imageView.layoutParams = params
-            imageView.setImageResource(if (i <= puntuacion) R.drawable.star_full else R.drawable.star_empty)
-            parentLayout.addView(imageView, params)
+
+        when(puntuacion){
+            1f->{
+                binding.estrella1.setImageResource(R.drawable.star_full)
+                binding.estrella2.setImageResource(R.drawable.star_empty)
+                binding.estrella3.setImageResource(R.drawable.star_empty)
+                binding.estrella4.setImageResource(R.drawable.star_empty)
+                binding.estrella5.setImageResource(R.drawable.star_empty)
+            }
+            2f->{
+                binding.estrella1.setImageResource(R.drawable.star_full)
+                binding.estrella2.setImageResource(R.drawable.star_full)
+                binding.estrella3.setImageResource(R.drawable.star_empty)
+                binding.estrella4.setImageResource(R.drawable.star_empty)
+                binding.estrella5.setImageResource(R.drawable.star_empty)
+            }
+            3f->{
+                binding.estrella1.setImageResource(R.drawable.star_full)
+                binding.estrella2.setImageResource(R.drawable.star_full)
+                binding.estrella3.setImageResource(R.drawable.star_full)
+                binding.estrella4.setImageResource(R.drawable.star_empty)
+                binding.estrella5.setImageResource(R.drawable.star_empty)
+            }
+            4f->{
+                binding.estrella1.setImageResource(R.drawable.star_full)
+                binding.estrella2.setImageResource(R.drawable.star_full)
+                binding.estrella3.setImageResource(R.drawable.star_full)
+                binding.estrella4.setImageResource(R.drawable.star_full)
+                binding.estrella5.setImageResource(R.drawable.star_empty)
+            }
+            5f->{
+                binding.estrella1.setImageResource(R.drawable.star_full)
+                binding.estrella2.setImageResource(R.drawable.star_full)
+                binding.estrella3.setImageResource(R.drawable.star_full)
+                binding.estrella4.setImageResource(R.drawable.star_full)
+                binding.estrella5.setImageResource(R.drawable.star_full)
+            }
+
         }
 
 
 
-        binding.star1.setOnClickListener {
-            binding.star1.setImageResource(R.drawable.star_full)
-            binding.star2.setImageResource(R.drawable.star_empty)
-            binding.star3.setImageResource(R.drawable.star_empty)
-            binding.star4.setImageResource(R.drawable.star_empty)
-            binding.star5.setImageResource(R.drawable.star_empty)
+        binding.estrella1.setOnClickListener {
+            binding.estrella1.setImageResource(R.drawable.star_full)
+            binding.estrella2.setImageResource(R.drawable.star_empty)
+            binding.estrella3.setImageResource(R.drawable.star_empty)
+            binding.estrella4.setImageResource(R.drawable.star_empty)
+            binding.estrella5.setImageResource(R.drawable.star_empty)
             puntuacion=1f
         }
-        binding.star2.setOnClickListener {
-            binding.star1.setImageResource(R.drawable.star_full)
-            binding.star2.setImageResource(R.drawable.star_full)
-            binding.star3.setImageResource(R.drawable.star_empty)
-            binding.star4.setImageResource(R.drawable.star_empty)
-            binding.star5.setImageResource(R.drawable.star_empty)
+        binding.estrella2.setOnClickListener {
+            binding.estrella1.setImageResource(R.drawable.star_full)
+            binding.estrella2.setImageResource(R.drawable.star_full)
+            binding.estrella3.setImageResource(R.drawable.star_empty)
+            binding.estrella4.setImageResource(R.drawable.star_empty)
+            binding.estrella5.setImageResource(R.drawable.star_empty)
             puntuacion=2f
         }
-        binding.star3.setOnClickListener {
-            binding.star1.setImageResource(R.drawable.star_full)
-            binding.star2.setImageResource(R.drawable.star_full)
-            binding.star3.setImageResource(R.drawable.star_full)
-            binding.star4.setImageResource(R.drawable.star_empty)
-            binding.star5.setImageResource(R.drawable.star_empty)
+        binding.estrella3.setOnClickListener {
+            binding.estrella1.setImageResource(R.drawable.star_full)
+            binding.estrella2.setImageResource(R.drawable.star_full)
+            binding.estrella3.setImageResource(R.drawable.star_full)
+            binding.estrella4.setImageResource(R.drawable.star_empty)
+            binding.estrella5.setImageResource(R.drawable.star_empty)
             puntuacion=3f
         }
-        binding.star4.setOnClickListener {
-            binding.star1.setImageResource(R.drawable.star_full)
-            binding.star2.setImageResource(R.drawable.star_full)
-            binding.star3.setImageResource(R.drawable.star_full)
-            binding.star4.setImageResource(R.drawable.star_full)
-            binding.star5.setImageResource(R.drawable.star_empty)
+        binding.estrella4.setOnClickListener {
+            binding.estrella1.setImageResource(R.drawable.star_full)
+            binding.estrella2.setImageResource(R.drawable.star_full)
+            binding.estrella3.setImageResource(R.drawable.star_full)
+            binding.estrella4.setImageResource(R.drawable.star_full)
+            binding.estrella5.setImageResource(R.drawable.star_empty)
             puntuacion=4f
         }
-        binding.star5.setOnClickListener {
-            binding.star1.setImageResource(R.drawable.star_full)
-            binding.star2.setImageResource(R.drawable.star_full)
-            binding.star3.setImageResource(R.drawable.star_full)
-            binding.star4.setImageResource(R.drawable.star_full)
-            binding.star5.setImageResource(R.drawable.star_full)
+        binding.estrella5.setOnClickListener {
+            binding.estrella1.setImageResource(R.drawable.star_full)
+            binding.estrella2.setImageResource(R.drawable.star_full)
+            binding.estrella3.setImageResource(R.drawable.star_full)
+            binding.estrella4.setImageResource(R.drawable.star_full)
+            binding.estrella5.setImageResource(R.drawable.star_full)
             puntuacion=5f
         }
 
@@ -266,7 +294,7 @@ class EditaPokemonActivity : AppCompatActivity() {
                             fileId = identificadorAppWrite,
                             file = file
                         )
-                        foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto"
+                        foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto&output=png"
 
                         newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo,num,puntuacion)
 
@@ -277,6 +305,7 @@ class EditaPokemonActivity : AppCompatActivity() {
                         Log.e("UploadError", "Error al subir la imagen: ${e.message}")
                     }
                 }
+
 
             }
 

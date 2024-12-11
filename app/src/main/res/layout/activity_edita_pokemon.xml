@@ -148,27 +148,27 @@
 
         <!--Aquí las estrellas-->
         <ImageView
-            android:id="@+id/star_1"
+            android:id="@+id/estrella_1"
             android:src="@drawable/star_empty"
             android:layout_width="25dp"
             android:layout_height="25dp"/>
         <ImageView
-            android:id="@+id/star_2"
+            android:id="@+id/estrella_2"
             android:src="@drawable/star_empty"
             android:layout_width="25dp"
             android:layout_height="25dp"/>
         <ImageView
-            android:id="@+id/star_3"
+            android:id="@+id/estrella_3"
             android:src="@drawable/star_empty"
             android:layout_width="25dp"
             android:layout_height="25dp"/>
         <ImageView
-            android:id="@+id/star_4"
+            android:id="@+id/estrella_4"
             android:src="@drawable/star_empty"
             android:layout_width="25dp"
             android:layout_height="25dp"/>
         <ImageView
-            android:id="@+id/star_5"
+            android:id="@+id/estrella_5"
             android:src="@drawable/star_empty"
             android:layout_width="25dp"
             android:layout_height="25dp"/>

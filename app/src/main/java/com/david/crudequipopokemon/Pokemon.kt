@@ -73,6 +73,29 @@ fun enumToDrawableFB(tipo:PokemonTipo):Int{
         else -> { R.drawable.fantasma}
     }
 }
+fun enumToColorFB(tipo:PokemonTipo):Int{
+    return when(tipo){
+        PokemonTipo.PLANTA -> R.color.planta
+        PokemonTipo.AGUA -> R.color.agua
+        PokemonTipo.FUEGO -> R.color.fuego
+        PokemonTipo.LUCHA -> R.color.lucha
+        PokemonTipo.VENENO -> R.color.veneno
+        PokemonTipo.ACERO -> R.color.acero
+        PokemonTipo.BICHO -> R.color.bicho
+        PokemonTipo.DRAGON -> R.color.dragon
+        PokemonTipo.ELECTRICO -> R.color.electrico
+        PokemonTipo.HADA -> R.color.hada
+        PokemonTipo.HIELO -> R.color.hielo
+        PokemonTipo.PSIQUICO -> R.color.psiquico
+        PokemonTipo.ROCA -> R.color.roca
+        PokemonTipo.TIERRA -> R.color.tierra
+        PokemonTipo.SINIESTRO -> R.color.siniestro
+        PokemonTipo.NORMAL -> R.color.normal
+        PokemonTipo.VOLADOR -> R.color.volador
+        PokemonTipo.FANTASMA -> R.color.fantasma
+        else -> { R.color.black}
+    }
+}
 
 fun getCurrentDate(): String {
     val currentDate = LocalDate.now()

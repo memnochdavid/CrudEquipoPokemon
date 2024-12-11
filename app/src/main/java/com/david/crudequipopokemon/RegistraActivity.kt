@@ -89,7 +89,6 @@ class RegistraActivity : AppCompatActivity() {
         //spinner
         val tipos= PokemonTipo.entries
 
-
         val adapter1 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
         adapter1.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
         binding.tipoPokemon1.adapter = adapter1
@@ -97,7 +96,7 @@ class RegistraActivity : AppCompatActivity() {
         binding.tipoPokemon1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedType = parent?.getItemAtPosition(position) as PokemonTipo
-                if (selectedType != PokemonTipo.NULL) {
+                if (selectedType != PokemonTipo.NULL) {1
                     if (tipo.size < 1) {
                         tipo.add(selectedType)
                     } else {
@@ -241,23 +240,12 @@ class RegistraActivity : AppCompatActivity() {
                         Toast.makeText(this@RegistraActivity, "${newPokemon.name} registrado correctamente", Toast.LENGTH_SHORT).show()
                     }
                 }
-
-
-
-
-
             }
-
-
         }
         binding.volver.setOnClickListener {
             finish()
         }
-
-
     }
-
-
     fun validaNombre(input:String):Boolean{
         if(input.length<1) return false
         else return true

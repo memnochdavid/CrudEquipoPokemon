@@ -72,6 +72,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-storage-ktx")
     //glide , para cargar una imagen desde un enlace
-    implementation("com.github.bumptech.glide:glide:4.14.2") // Use the latest version
-    annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0") // Use the latest version
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 }
