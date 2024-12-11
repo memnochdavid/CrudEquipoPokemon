@@ -1,6 +1,8 @@
 package com.david.crudequipopokemon
 
 import java.io.Serializable
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 data class PokemonFB(
     var id: String? = null,
@@ -8,12 +10,22 @@ data class PokemonFB(
     var id_imagen: String? = null,
     var name: String="",
     var tipo: List<PokemonTipo> = mutableListOf(),
+    var fecha_captura:String="",
+    var num:Int=0,
+    var puntuacion:Float=0f,
     var stability:Int=0
 ): Serializable{
     constructor(
         name: String,
-        tipo: List<PokemonTipo>
-    ) : this(null,null, null, name, tipo)
+        tipo: List<PokemonTipo>,
+        fecha_captura:String,
+        num:Int,
+        puntuacion:Float,
+    ) : this(null,null, null, name, tipo, fecha_captura,num,puntuacion)
+    init{
+        fecha_captura=getCurrentDate()
+    }
+
 }
 
 enum class PokemonTipo(val tag: String) {
@@ -60,4 +72,10 @@ fun enumToDrawableFB(tipo:PokemonTipo):Int{
         PokemonTipo.FANTASMA -> R.drawable.fantasma
         else -> { R.drawable.fantasma}
     }
+}
+
+fun getCurrentDate(): String {
+    val currentDate = LocalDate.now()
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    return currentDate.format(formatter)
 }

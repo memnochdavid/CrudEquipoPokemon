@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +42,7 @@ class RegistraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContentView(R.layout.activity_registra)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -183,7 +184,7 @@ class RegistraActivity : AppCompatActivity() {
                                 file = file
                             )
                         }
-                        foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto"
+                        foto = "https://cloud.appwrite.io/v1/storage/buckets/$id_bucket/files/$identificadorAppWrite/preview?project=$id_projecto&output=png"
 
                         newPokemon = PokemonFB(identificador_poke,foto,identificadorAppWrite,nombre,tipo)
 
@@ -193,6 +194,8 @@ class RegistraActivity : AppCompatActivity() {
 
                     }catch (e: Exception){
                         Log.e("UploadError", "Error al subir la imagen: ${e.message}")
+                    }finally {
+                        Toast.makeText(this@RegistraActivity, "${newPokemon.name} registrado correctamente", Toast.LENGTH_SHORT).show()
                     }
                 }
 

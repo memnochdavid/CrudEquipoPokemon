@@ -50,13 +50,31 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nombre_layout"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingEnd="10dp"
             android:hint="nombre"
             app:errorEnabled="true"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nombre_text_input_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/numero_layout"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10sp"
+            android:hint="número"
+            app:errorEnabled="true"
+            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/numero_text_input_edit"
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"/>

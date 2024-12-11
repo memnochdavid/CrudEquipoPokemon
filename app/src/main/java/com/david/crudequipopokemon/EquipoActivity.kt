@@ -1,6 +1,7 @@
 package com.david.crudequipopokemon
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +26,7 @@ class EquipoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContentView(R.layout.activity_equipo)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -46,6 +47,7 @@ class EquipoActivity : AppCompatActivity() {
                     equipo.clear()
                     snapshot.children.forEach{ hijo: DataSnapshot?->
                         val pojo_pokemon=hijo?.getValue(PokemonFB::class.java)
+                        Log.d("POKEMON",pojo_pokemon.toString())
                         equipo.add(pojo_pokemon!!)
                     }
                     binding.pokelistRV.adapter?.notifyDataSetChanged()

@@ -16,11 +16,11 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="20dp"
-        android:paddingVertical="40dp"
+        android:paddingTop="20dp"
         app:layout_constraintVertical_weight="1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/volver"
-        tools:itemCount="5"
+        tools:itemCount="6"
         tools:listitem="@layout/objeto_pokemon" />
 
     <androidx.appcompat.widget.AppCompatButton
