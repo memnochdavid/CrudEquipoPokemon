@@ -114,6 +114,8 @@ class PokemonAdaptador(private val equipo: MutableList<PokemonFB>) :
             ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
+        params.setMargins(0, 0, 0, 0)
+
         val parentLayout = holder.itemView.findViewById<LinearLayout>(R.id.estrellas)
         parentLayout.removeAllViews()
 

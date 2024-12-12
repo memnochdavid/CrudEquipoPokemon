@@ -70,6 +70,7 @@ class EditaPokemonActivity : AppCompatActivity() {
             .into(binding.foto)
 
         binding.nombreTextInputEdit.setText(pokemon.name)
+        binding.numeroTextInputEdit.setText(pokemon.num.toString())
 
 
 
@@ -116,6 +117,10 @@ class EditaPokemonActivity : AppCompatActivity() {
         val adapter1 = ArrayAdapter(this, R.layout.spinner_a, tipos)
         adapter1.setDropDownViewResource(R.layout.spinner_b)
         binding.tipoPokemon1.adapter = adapter1
+        var defaultTypeIndex = tipos.indexOf(tipo[0])
+        if (defaultTypeIndex != -1) {
+            binding.tipoPokemon1.setSelection(defaultTypeIndex)
+        }
         binding.tipoPokemon1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedType = parent?.getItemAtPosition(position) as PokemonTipo
@@ -135,6 +140,37 @@ class EditaPokemonActivity : AppCompatActivity() {
                 //nada
             }
         }
+        val adapter2 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
+        adapter2.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
+        binding.tipoPokemon2.adapter = adapter2
+        if (tipo.size < 2){
+            defaultTypeIndex = tipos.indexOf(PokemonTipo.NULL)
+        }else{
+            defaultTypeIndex = tipos.indexOf(tipo[1])
+        }
+        if (defaultTypeIndex != -1) {
+            binding.tipoPokemon2.setSelection(defaultTypeIndex)
+        }
+        binding.tipoPokemon2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedType = parent?.getItemAtPosition(position) as PokemonTipo
+                if (selectedType != PokemonTipo.NULL) {
+                    if (tipo.size < 2) {
+                        tipo.add(selectedType)
+                    } else {
+                        tipo[1] = selectedType
+                    }
+                } else {
+                    if (tipo.size >= 2 && selectedType == PokemonTipo.NULL) {
+                        tipo.removeAt(1)
+                    }
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                //nada
+            }
+        }
+
 
         //las estrellas
 
@@ -221,31 +257,6 @@ class EditaPokemonActivity : AppCompatActivity() {
             puntuacion=5f
         }
 
-        val adapter2 = ArrayAdapter(this, R.layout.spinner_a, tipos)//el tema para el objeto del layout
-        adapter2.setDropDownViewResource(R.layout.spinner_b)//el tema para la lista que se despliega
-        binding.tipoPokemon2.adapter = adapter2
-        binding.tipoPokemon2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedType = parent?.getItemAtPosition(position) as PokemonTipo
-                if (selectedType != PokemonTipo.NULL) {
-                    if (tipo.size < 2) {
-                        tipo.add(selectedType)
-                    } else {
-                        tipo[1] = selectedType
-                    }
-                } else {
-                    if (tipo.size >= 2 && selectedType == PokemonTipo.NULL) {
-                        tipo.removeAt(1)
-                    }
-                }
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                //nada
-            }
-        }
-
-
-
         //confirma
         binding.edita.setOnClickListener {
             //nombre
@@ -269,7 +280,8 @@ class EditaPokemonActivity : AppCompatActivity() {
                 val identificador_poke = pokemon.id
 
                 //subimos la imagen a appwrite storage y los datos a firebase
-                var identificadorAppWrite = identificador_poke?.substring(1, 20) ?: "" // coge el identificador y lo adapta a appwrite
+                //var identificadorAppWrite = identificador_poke?.substring(1, 20) ?: "" // coge el identificador y lo adapta a appwrite
+                var identificadorAppWrite = refDB.child("equipo").child("pokemon").push().key!!.substring(1, 20) ?: ""
 
                 //necesario para crear un archivo temporal con la imagen
                 val inputStream = this.contentResolver.openInputStream(url_foto!!)

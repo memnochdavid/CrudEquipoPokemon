@@ -201,8 +201,9 @@ class RegistraActivity : AppCompatActivity() {
                 val identificador_poke = refDB.child("equipo").child("pokemon").push().key
 
                 //subimos la imagen a appwrite storage y los datos a firebase
-                var identificadorAppWrite = identificador_poke?.substring(1, 20) ?: "" // coge el identificador y lo adapta a appwrite
+                //var identificadorAppWrite = identificador_poke?.substring(1, 20) ?: "" // coge el identificador y lo adapta a appwrite
 
+                var identificadorAppWrite = refDB.child("equipo").child("pokemon").push().key!!.substring(1, 20) ?: ""
                 //necesario para crear un archivo temporal con la imagen
                 val inputStream = this.contentResolver.openInputStream(url_foto!!)
                 scopeUser.launch {//scope para las funciones de appwrite, pero ya aprovechamos y metemos el código de firebase
