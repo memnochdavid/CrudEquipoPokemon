@@ -22,12 +22,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlin.collections.reverse
+import kotlin.collections.sortBy
 
 class PokemonAdaptador(private val equipo: MutableList<PokemonFB>) :
     RecyclerView.Adapter<PokemonAdaptador.PokemonViewHolder>() {
 
     private lateinit var contexto: Context
     private var lista_filtrada = equipo
+
 
     inner class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val pokemonImage: ImageView = itemView.findViewById(R.id.pokemonImage)
@@ -130,4 +133,21 @@ class PokemonAdaptador(private val equipo: MutableList<PokemonFB>) :
     override fun getItemCount() = lista_filtrada.size
 
 
+    fun orden(ordena_por: String) {
+        when (ordena_por) {
+            "nombre" -> lista_filtrada.sortBy { it.name }
+            "numero" -> {
+                lista_filtrada.sortBy { it.num }
+                lista_filtrada.reverse()
+            }
+            "puntuacion" -> {
+                lista_filtrada.sortBy { it.puntuacion }
+                lista_filtrada.reverse()
+            }
+            "fecha" -> {
+                lista_filtrada.sortBy { it.fecha_captura }
+                lista_filtrada.reverse()
+            }
+        }
+    }
 }
